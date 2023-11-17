@@ -14,20 +14,30 @@ struct environment {
     var jb_folder: String?
 }
 
+enum installStatus {
+    case simulated
+    case rootful
+    case rootful_installed
+    case rootless
+    case rootless_installed
+}
+
 class Check {
     
-    static public func installation() -> environment {
-        if (envInfo.isSimulator) {
-            return environment(env_type: -1, jb_folder: nil)
-        }
-        
-        if (envInfo.isRootful) {
-            return environment(env_type: 0, jb_folder: nil)
+    static public func installation() -> installStatus {
+        #if targetEnvironment(simulator)
+        return .simulated
+        #else
+        if envInfo.isRootful {
+            if fm.fileExists(atPath: "/.procursus_strapped") {
+                return .rootful_installed
+            } else {
+                return .rootful
+            }
         }
         
         let dir = "/private/preboot/\(envInfo.bmHash)"
-        var value = Int()
-        var jbFolders = [String()]
+        var jbFolders = [String]()
         
         do {
             let contents = try fm.contentsOfDirectory(atPath: dir)
@@ -37,24 +47,15 @@ class Check {
             let jbSymlinkExists = fm.fileExists(atPath: jbSymlinkPath)
             
             if jbFolderExists && jbSymlinkExists {
-                log(type: .info, msg: "Found jb- folders and /var/jb exists.")
-                value = 1
-            } else if jbFolderExists && !jbSymlinkExists {
-                log(type: .info, msg: "Found jb- folders but /var/jb does not exist.")
-                value = 2
+                return .rootless_installed
             } else {
-                log(type: .info, msg: "jb-XXXXXXXX does not exist")
-                value = 0
+                return .rootless
             }
         } catch {
             log(type: .fatal, msg: "Failed to get contents of directory: \(error.localizedDescription)")
+            return .rootless
         }
-        
-        if value == 0 {
-            return environment(env_type: 0, jb_folder: nil)
-        } else {
-            return environment(env_type: value, jb_folder: "\(dir)/\(jbFolders[0])")
-        }
+        #endif
     }
     
     @discardableResult
@@ -98,9 +99,6 @@ class Check {
     
     static public func prerequisites() -> Void {
         Check.helperSymlink()
-        #if targetEnvironment(simulator)
-            envInfo.isSimulator = true
-        #endif
         
         // rootless/rootful check
         helper(args: ["-t"])
@@ -117,30 +115,13 @@ class Check {
         
         // get bmhash
         helper(args: ["-b"])
-
-        // is installed check
-        if fileExists("/.procursus_strapped") || fileExists("/var/jb/.procursus_strapped") {
-            envInfo.isInstalled = true
-        }
         
-        // device info
-        envInfo.systemVersion = "\(local("VERSION_INFO")) \(UIDevice.current.systemVersion)"
-        envInfo.systemArch = String(cString: NXGetLocalArchInfo().pointee.name)
-        
-        // jb-XXXXXXXX and /var/jb checks
-        envInfo.envType = Check.installation().env_type
-      
         envInfo.hasChecked = true
-        log(msg: "## palera1nLoader logs ##")
+        log(msg: "## Loader logs ##")
         log(msg: "Jailbreak Type: \(envInfo.isRootful ? "Rootful" : "Rootless")")
-        log(msg: "Environment: \(envInfo.envType)")
-        log(msg: "iOS: \(envInfo.systemVersion)")
-        log(msg: "Arch: \(envInfo.systemArch)")
-        log(msg: "Installed: \(envInfo.isInstalled)")
-        log(msg: "Force Reverted: \(envInfo.hasForceReverted)")
+        log(msg: "iOS: \(UIDevice.current.systemVersion)")
         log(msg: "kinfo: \(envInfo.kinfoFlags)")
         log(msg: "pinfo: \(envInfo.pinfoFlags)")
         log(msg: "CoreFoundation: \(envInfo.CF)")
-        log(msg: "Hash: \(envInfo.bmHash)")
     }
 }

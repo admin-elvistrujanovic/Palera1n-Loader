@@ -11,7 +11,7 @@ import Darwin.POSIX
 import Extras
 
 
-@discardableResult func spawn(command: String, args: [String], root: Bool = true) -> Int {
+@discardableResult func spawn(command: String, args: [String]) -> Int {
     var pipestdout: [Int32] = [0, 0]
     var pipestderr: [Int32] = [0, 0]
 
@@ -34,15 +34,13 @@ import Extras
     defer { for case let arg? in argv { free(arg) } }
     
     var fileActions: posix_spawn_file_actions_t?
-    if root {
-        posix_spawn_file_actions_init(&fileActions)
-        posix_spawn_file_actions_addclose(&fileActions, pipestdout[0])
-        posix_spawn_file_actions_addclose(&fileActions, pipestderr[0])
-        posix_spawn_file_actions_adddup2(&fileActions, pipestdout[1], STDOUT_FILENO)
-        posix_spawn_file_actions_adddup2(&fileActions, pipestderr[1], STDERR_FILENO)
-        posix_spawn_file_actions_addclose(&fileActions, pipestdout[1])
-        posix_spawn_file_actions_addclose(&fileActions, pipestderr[1])
-    }
+    posix_spawn_file_actions_init(&fileActions)
+    posix_spawn_file_actions_addclose(&fileActions, pipestdout[0])
+    posix_spawn_file_actions_addclose(&fileActions, pipestderr[0])
+    posix_spawn_file_actions_adddup2(&fileActions, pipestdout[1], STDOUT_FILENO)
+    posix_spawn_file_actions_adddup2(&fileActions, pipestderr[1], STDERR_FILENO)
+    posix_spawn_file_actions_addclose(&fileActions, pipestdout[1])
+    posix_spawn_file_actions_addclose(&fileActions, pipestderr[1])
     
     var attr: posix_spawnattr_t?
     posix_spawnattr_init(&attr)
@@ -145,16 +143,21 @@ import Extras
     }
     if (args[1] == "-p") {
         let str = stdoutStr.trimmingCharacters(in: .whitespacesAndNewlines)
-        let pflags_dec = Int(str)!
-        let pflags_hex = String(pflags_dec, radix: 16)
-        envInfo.pinfoFlags = "0x\(pflags_hex) (\(str))"
+        if let int_val = UInt32(str) {
+            envInfo.pinfoFlags = String(format: "0x%lx (\(str))", int_val)
+        } else {
+            envInfo.pinfoFlags = "0x0"
+        }
     }
     
     if (args[1] == "-k") {
         let str = stdoutStr.trimmingCharacters(in: .whitespacesAndNewlines)
-        let kflags_dec = Int(str)!
-        let kflags_hex = String(kflags_dec, radix: 16)
-        envInfo.kinfoFlags = "0x\(kflags_hex) (\(str))"
+        if let int_val = UInt32(str) {
+            envInfo.kinfoFlags = String(format: "0x%lx (\(str))", int_val)
+        } else {
+            envInfo.kinfoFlags = "0x0"
+        }
+        
     }
     
     if (args[1] == "-s") {

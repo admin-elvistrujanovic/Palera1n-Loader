@@ -16,17 +16,19 @@
 		2FC154322A36B84D00AC9346 /* Opener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC154312A36B84D00AC9346 /* Opener.swift */; };
 		2FC154342A36C02000AC9346 /* Binpack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC154332A36C02000AC9346 /* Binpack.swift */; };
 		2FC154362A36C2E500AC9346 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC154352A36C2E500AC9346 /* Design.swift */; };
+		337311AB2AE86F2E00A9E0CB /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 337311AA2AE86F2E00A9E0CB /* Makefile */; };
 		2FCD4B262ACDDEF500E0F6E2 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B252ACDDEF500E0F6E2 /* Register.swift */; };
 		2FCD4B282ACDDFFB00E0F6E2 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B272ACDDFFB00E0F6E2 /* Container.swift */; };
 		2FCD4B2C2ACDE28300E0F6E2 /* zstdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B2B2ACDE28300E0F6E2 /* zstdHelper.swift */; };
 		2FCD4B2F2ACDE2A700E0F6E2 /* libzstd in Frameworks */ = {isa = PBXBuildFile; productRef = 2FCD4B2E2ACDE2A700E0F6E2 /* libzstd */; };
 		2FCD4B312ACDE35F00E0F6E2 /* Untar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B302ACDE35F00E0F6E2 /* Untar.swift */; };
-		33A420D92A0ED59D005AE29C /* DebugVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A420D82A0ED59D005AE29C /* DebugVC.swift */; };
 		33AED4E02A30050A006EC0B4 /* JsonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AED4DF2A30050A006EC0B4 /* JsonVC.swift */; };
 		33CCDA552ACD1255000E0111 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCDA542ACD1255000E0111 /* Download.swift */; };
-		33E15DAD29F4DC8F00D2770A /* DiagnosticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E15DAC29F4DC8F00D2770A /* DiagnosticsVC.swift */; };
-		33E15DAF29F4E6CA00D2770A /* ActionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E15DAE29F4E6CA00D2770A /* ActionsVC.swift */; };
-		33E15DB129F4F03A00D2770A /* LogViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E15DB029F4F03A00D2770A /* LogViewVC.swift */; };
+		33E15DAD29F4DC8F00D2770A /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E15DAC29F4DC8F00D2770A /* Diagnostics.swift */; };
+		33E15DAF29F4E6CA00D2770A /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E15DAE29F4E6CA00D2770A /* Actions.swift */; };
+		33E15DB129F4F03A00D2770A /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E15DB029F4F03A00D2770A /* LogView.swift */; };
+		33F0A3F82B0355E100BF1C0E /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0A3F72B0355E100BF1C0E /* Options.swift */; };
+		33F0A3FA2B0366F200BF1C0E /* LogList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0A3F92B0366F200BF1C0E /* LogList.swift */; };
 		4501473829FC1AEB0001834C /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501473729FC1AEB0001834C /* Logging.swift */; };
 		4509BACC29E7970300D36328 /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509BACB29E7970300D36328 /* Bootstrap.swift */; };
 		45E7E0F329E4EC5B0057741A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7E0F229E4EC5B0057741A /* Common.swift */; };
@@ -60,11 +62,11 @@
 		334B55232A4E518A00F243BE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		334B55252A4E526B00F243BE /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		334B55262A4E52DB00F243BE /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		337311AA2AE86F2E00A9E0CB /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		3384F5972A1EAAC000F8BF22 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3384F5982A1EAACC00F8BF22 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3384F59A2A1EAB2400F8BF22 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3384F59B2A1EAB3600F8BF22 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		33A420D82A0ED59D005AE29C /* DebugVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugVC.swift; sourceTree = "<group>"; };
 		33AA48DC2A19675E0070F207 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		33AA48DE2A1967800070F207 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		33AA48E12A1967950070F207 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -72,9 +74,11 @@
 		33AED4DF2A30050A006EC0B4 /* JsonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonVC.swift; sourceTree = "<group>"; };
 		33CCDA542ACD1255000E0111 /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
 		33DE13AA29DCAD7800DF3D5E /* External */ = {isa = PBXFileReference; lastKnownFileType = folder; path = External; sourceTree = "<group>"; };
-		33E15DAC29F4DC8F00D2770A /* DiagnosticsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticsVC.swift; sourceTree = "<group>"; };
-		33E15DAE29F4E6CA00D2770A /* ActionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsVC.swift; sourceTree = "<group>"; };
-		33E15DB029F4F03A00D2770A /* LogViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewVC.swift; sourceTree = "<group>"; };
+		33E15DAC29F4DC8F00D2770A /* Diagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diagnostics.swift; sourceTree = "<group>"; };
+		33E15DAE29F4E6CA00D2770A /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		33E15DB029F4F03A00D2770A /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		33F0A3F72B0355E100BF1C0E /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		33F0A3F92B0366F200BF1C0E /* LogList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogList.swift; sourceTree = "<group>"; };
 		4501473729FC1AEB0001834C /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		4509BACB29E7970300D36328 /* Bootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootstrap.swift; sourceTree = "<group>"; };
 		45E7E0F229E4EC5B0057741A /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -113,10 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				33AED4DF2A30050A006EC0B4 /* JsonVC.swift */,
-				33E15DB029F4F03A00D2770A /* LogViewVC.swift */,
-				33E15DAC29F4DC8F00D2770A /* DiagnosticsVC.swift */,
-				33E15DAE29F4E6CA00D2770A /* ActionsVC.swift */,
-				33A420D82A0ED59D005AE29C /* DebugVC.swift */,
+				33F0A3F72B0355E100BF1C0E /* Options.swift */,
+				33F0A3FB2B03727800BF1C0E /* ViewsInOptions */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,9 +177,21 @@
 			path = Bootstrap;
 			sourceTree = "<group>";
 		};
+		33F0A3FB2B03727800BF1C0E /* ViewsInOptions */ = {
+			isa = PBXGroup;
+			children = (
+				33E15DB029F4F03A00D2770A /* LogView.swift */,
+				33F0A3F92B0366F200BF1C0E /* LogList.swift */,
+				33E15DAC29F4DC8F00D2770A /* Diagnostics.swift */,
+				33E15DAE29F4E6CA00D2770A /* Actions.swift */,
+			);
+			path = ViewsInOptions;
+			sourceTree = "<group>";
+		};
 		E181BACD28CF914300CD25A6 = {
 			isa = PBXGroup;
 			children = (
+				337311AA2AE86F2E00A9E0CB /* Makefile */,
 				E181BAD828CF914300CD25A6 /* palera1nLoader */,
 				E181BAD728CF914300CD25A6 /* Products */,
 				2F12BB092A30BF5A0095972E /* Frameworks */,
@@ -314,14 +328,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33E15DB129F4F03A00D2770A /* LogViewVC.swift in Sources */,
+				33E15DB129F4F03A00D2770A /* LogView.swift in Sources */,
 				2FCD4B262ACDDEF500E0F6E2 /* Register.swift in Sources */,
 				2FC154302A36B83300AC9346 /* Checks.swift in Sources */,
-				33E15DAD29F4DC8F00D2770A /* DiagnosticsVC.swift in Sources */,
+				33F0A3FA2B0366F200BF1C0E /* LogList.swift in Sources */,
+				33E15DAD29F4DC8F00D2770A /* Diagnostics.swift in Sources */,
 				2FC154342A36C02000AC9346 /* Binpack.swift in Sources */,
+				337311AB2AE86F2E00A9E0CB /* Makefile in Sources */,
 				33AED4E02A30050A006EC0B4 /* JsonVC.swift in Sources */,
 				2FC154322A36B84D00AC9346 /* Opener.swift in Sources */,
 				2FC1542D2A36B7A900AC9346 /* Cells.swift in Sources */,
+				33F0A3F82B0355E100BF1C0E /* Options.swift in Sources */,
 				2F12BB102A30C4970095972E /* Decoder.swift in Sources */,
 				2FCD4B2C2ACDE28300E0F6E2 /* zstdHelper.swift in Sources */,
 				2FC154362A36C2E500AC9346 /* Design.swift in Sources */,
@@ -329,14 +346,13 @@
 				4501473829FC1AEB0001834C /* Logging.swift in Sources */,
 				45E7E0F329E4EC5B0057741A /* Common.swift in Sources */,
 				2FCD4B312ACDE35F00E0F6E2 /* Untar.swift in Sources */,
-				33E15DAF29F4E6CA00D2770A /* ActionsVC.swift in Sources */,
+				33E15DAF29F4E6CA00D2770A /* Actions.swift in Sources */,
 				E181BADA28CF914300CD25A6 /* AppDelegate.swift in Sources */,
 				2F07EDFA2AD874E5008DD58C /* paleinfo.swift in Sources */,
 				E1C440AC28D0EDFB000DBB1A /* CommandRunner.swift in Sources */,
 				4509BACC29E7970300D36328 /* Bootstrap.swift in Sources */,
 				2FCD4B282ACDDFFB00E0F6E2 /* Container.swift in Sources */,
 				2FC1542B2A36B71300AC9346 /* Alerts.swift in Sources */,
-				33A420D92A0ED59D005AE29C /* DebugVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +442,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -483,7 +499,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -519,7 +535,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -528,10 +544,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/palera1nLoader/Required",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.samiiau.loader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_DISABLE_SAFETY_CHECKS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/palera1nLoader/External";
@@ -567,7 +585,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -576,10 +594,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/palera1nLoader/Required",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.samiiau.loader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_DISABLE_SAFETY_CHECKS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/palera1nLoader/External";

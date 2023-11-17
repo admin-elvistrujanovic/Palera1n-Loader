@@ -39,7 +39,7 @@ struct ManagerItem: Codable {
     let name: String
     let uri: String
     let icon: String
-    let filePaths: [String] // Updated the type to [String]
+    let filePaths: [String]
 }
 
 struct Asset: Codable {
@@ -61,33 +61,44 @@ public struct cellInfo {
     let paths: [String]
 }
 
-public func getBootstrapURL(_ json: loaderJSON) -> String? {
-    let jailbreakType = envInfo.isRootful ? "Rootful" : "Rootless"
-    let cfver = String(envInfo.CF)
-    var items: [BootstrapItem]?
-    
-    for type in json.bootstraps {
-        if (type.label == jailbreakType) {
-            items = type.items
-        }
-    }
-    
-    if (items == nil) {
-        log(type: .error, msg: "Failed to find bootstrap url.")
-        return nil
-    }
+/* How this works is that anything lower than what the loader.json has will cause it to return nil, however if it's higher than it will get the latest available version and bootstrap with that instead, maybe I should add a cf version override but not too sure on what to do else for this, for the sake of apple intentionally being moronic */
 
-    for bootstrap in items! {
-        if (bootstrap.cfver == cfver) {
-            return bootstrap.uri
+public func jbType() -> String {
+    var jailbreakType = envInfo.isRootful ? "Rootful" : "Rootless"
+    if (envInfo.w_button) {
+        if jailbreakType == "Rootless" {
+            jailbreakType = "Rootful"
+        } else if jailbreakType == "Rootful" {
+            jailbreakType = "Rootless"
+        }
+    }
+    return jailbreakType
+}
+
+public func getBootstrapURL(_ json: loaderJSON) -> String? {
+    let jailbreakType = jbType()
+    let cfver = String(envInfo.CF)
+    
+    if let items = json.bootstraps.first(where: { $0.label == jailbreakType })?.items {
+        let sortedItems = items.sorted { $0.cfver > $1.cfver }
+        
+        if let _ = sortedItems.first {
+            if let bootstrap = sortedItems.first(where: { $0.cfver == cfver }) {
+                return bootstrap.uri
+            } else if let latestBootstrap = sortedItems.first(where: { $0.cfver < cfver }) {
+                return latestBootstrap.uri
+            }
         }
     }
     
+    log(type: .error, msg: "Failed to find bootstrap URL.")
     return nil
 }
 
+
+
 public func getManagerURL(_ json: loaderJSON,_ pkgMgr: String) -> String? {
-    let jailbreakType = envInfo.isRootful ? "Rootful" : "Rootless"
+    let jailbreakType = jbType()
     var items: [ManagerItem]?
     
     for type in json.managers {
@@ -111,7 +122,7 @@ public func getManagerURL(_ json: loaderJSON,_ pkgMgr: String) -> String? {
 }
 
 public func getAssetsInfo(_ json: loaderJSON) -> (repositories: [String], packages: [String])? {
-    let jailbreakType = envInfo.isRootful ? "Rootful" : "Rootless"
+    let jailbreakType = jbType()
     var packages: [String] = []
     var repositories: [String] = []
 
@@ -119,7 +130,7 @@ public func getAssetsInfo(_ json: loaderJSON) -> (repositories: [String], packag
         if asset.label == jailbreakType {
             packages = asset.packages
             for repository in asset.repositories {
-                let repositoryInfo = "Types: deb\nURI: \(repository.uri)\nSuite: \(repository.suite)\nComponent: \(repository.component)\n\n"
+                let repositoryInfo = "Types: deb\nURIs: \(repository.uri)\nSuites: \(repository.suite)\nComponents: \(repository.component)\n\n"
                 repositories.append(repositoryInfo)
             }
         }
@@ -137,8 +148,7 @@ public func getAssetsInfo(_ json: loaderJSON) -> (repositories: [String], packag
 
 
 public func getCellInfo(_ json: loaderJSON) -> cellInfo? {
-    let jailbreakType = envInfo.isRootful ? "Rootful" : "Rootless"
-    //let jailbreakType = "Rootful"
+    let jailbreakType = jbType()
     var items: [ManagerItem]?
     var names: [String] = []
     var icons: [String] = []
@@ -173,7 +183,7 @@ public func getCellInfo(_ json: loaderJSON) -> cellInfo? {
 
 extension JsonVC {
   func fetchJSON() {
-      guard let url = URL(string: "\(envInfo.jsonURI)") else {
+      guard let url = URL(string: envInfo.jsonURI) else {
           log(type: .error, msg: "Invalid JSON URL")
           self.showErrorCell(with: errorMessage)
           self.isLoading = false
@@ -198,13 +208,16 @@ extension JsonVC {
           }
           
           do {
-              //let json = try JSONSerialization.jsonObject(with: data, options: [])
               let jsonapi = try JSONDecoder().decode(loaderJSON.self, from: data)
               envInfo.jsonInfo = jsonapi
               self.tableData = [getCellInfo(jsonapi)!.names, getCellInfo(jsonapi)!.icons]
               self.sectionTitles = [""]
               
-              log(msg: "[JSON CELL DATA] \(self.tableData)")
+              if getBootstrapURL(jsonapi) == nil {
+                  self.showErrorCell(with: self.errorMessage)
+                  self.isLoading = false
+                  return
+              }
             
               DispatchQueue.global().async {
                   let iconImages = getCellInfo(jsonapi)!.icons.map { iconURLString -> UIImage? in
@@ -231,7 +244,6 @@ extension JsonVC {
           }
       }
       
-      /// Start the network request
       task.resume()
   }
   func retryFetchJSON() {
