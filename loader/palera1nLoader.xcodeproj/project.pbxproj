@@ -16,12 +16,12 @@
 		2FC154322A36B84D00AC9346 /* Opener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC154312A36B84D00AC9346 /* Opener.swift */; };
 		2FC154342A36C02000AC9346 /* Binpack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC154332A36C02000AC9346 /* Binpack.swift */; };
 		2FC154362A36C2E500AC9346 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC154352A36C2E500AC9346 /* Design.swift */; };
-		337311AB2AE86F2E00A9E0CB /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 337311AA2AE86F2E00A9E0CB /* Makefile */; };
 		2FCD4B262ACDDEF500E0F6E2 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B252ACDDEF500E0F6E2 /* Register.swift */; };
 		2FCD4B282ACDDFFB00E0F6E2 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B272ACDDFFB00E0F6E2 /* Container.swift */; };
 		2FCD4B2C2ACDE28300E0F6E2 /* zstdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B2B2ACDE28300E0F6E2 /* zstdHelper.swift */; };
 		2FCD4B2F2ACDE2A700E0F6E2 /* libzstd in Frameworks */ = {isa = PBXBuildFile; productRef = 2FCD4B2E2ACDE2A700E0F6E2 /* libzstd */; };
 		2FCD4B312ACDE35F00E0F6E2 /* Untar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B302ACDE35F00E0F6E2 /* Untar.swift */; };
+		337311AB2AE86F2E00A9E0CB /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 337311AA2AE86F2E00A9E0CB /* Makefile */; };
 		33AED4E02A30050A006EC0B4 /* JsonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AED4DF2A30050A006EC0B4 /* JsonVC.swift */; };
 		33CCDA552ACD1255000E0111 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCDA542ACD1255000E0111 /* Download.swift */; };
 		33E15DAD29F4DC8F00D2770A /* Diagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E15DAC29F4DC8F00D2770A /* Diagnostics.swift */; };
@@ -29,6 +29,9 @@
 		33E15DB129F4F03A00D2770A /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E15DB029F4F03A00D2770A /* LogView.swift */; };
 		33F0A3F82B0355E100BF1C0E /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0A3F72B0355E100BF1C0E /* Options.swift */; };
 		33F0A3FA2B0366F200BF1C0E /* LogList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F0A3F92B0366F200BF1C0E /* LogList.swift */; };
+		33FEDF012B086180009108CD /* Install+apt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEDF002B086180009108CD /* Install+apt.swift */; };
+		33FEDF032B086707009108CD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33FEDF022B086707009108CD /* IOKit.framework */; };
+		33FEDF052B086ADD009108CD /* Device+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FEDF042B086ADD009108CD /* Device+Info.swift */; };
 		4501473829FC1AEB0001834C /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501473729FC1AEB0001834C /* Logging.swift */; };
 		4509BACC29E7970300D36328 /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4509BACB29E7970300D36328 /* Bootstrap.swift */; };
 		45E7E0F329E4EC5B0057741A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7E0F229E4EC5B0057741A /* Common.swift */; };
@@ -79,6 +82,9 @@
 		33E15DB029F4F03A00D2770A /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		33F0A3F72B0355E100BF1C0E /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		33F0A3F92B0366F200BF1C0E /* LogList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogList.swift; sourceTree = "<group>"; };
+		33FEDF002B086180009108CD /* Install+apt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Install+apt.swift"; sourceTree = "<group>"; };
+		33FEDF022B086707009108CD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		33FEDF042B086ADD009108CD /* Device+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+Info.swift"; sourceTree = "<group>"; };
 		4501473729FC1AEB0001834C /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		4509BACB29E7970300D36328 /* Bootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootstrap.swift; sourceTree = "<group>"; };
 		45E7E0F229E4EC5B0057741A /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -99,6 +105,7 @@
 			files = (
 				2F12BB0C2A30BF5E0095972E /* CoreServices.framework in Frameworks */,
 				2FCD4B2F2ACDE2A700E0F6E2 /* libzstd in Frameworks */,
+				33FEDF032B086707009108CD /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +115,7 @@
 		2F12BB092A30BF5A0095972E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33FEDF022B086707009108CD /* IOKit.framework */,
 				2F12BB0A2A30BF5B0095972E /* CoreServices.framework */,
 			);
 			name = Frameworks;
@@ -150,6 +158,8 @@
 				2FCD4B252ACDDEF500E0F6E2 /* Register.swift */,
 				2FCD4B272ACDDFFB00E0F6E2 /* Container.swift */,
 				2F07EDF92AD874E5008DD58C /* paleinfo.swift */,
+				33FEDF002B086180009108CD /* Install+apt.swift */,
+				33FEDF042B086ADD009108CD /* Device+Info.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -331,9 +341,11 @@
 				33E15DB129F4F03A00D2770A /* LogView.swift in Sources */,
 				2FCD4B262ACDDEF500E0F6E2 /* Register.swift in Sources */,
 				2FC154302A36B83300AC9346 /* Checks.swift in Sources */,
+				33FEDF012B086180009108CD /* Install+apt.swift in Sources */,
 				33F0A3FA2B0366F200BF1C0E /* LogList.swift in Sources */,
 				33E15DAD29F4DC8F00D2770A /* Diagnostics.swift in Sources */,
 				2FC154342A36C02000AC9346 /* Binpack.swift in Sources */,
+				33FEDF052B086ADD009108CD /* Device+Info.swift in Sources */,
 				337311AB2AE86F2E00A9E0CB /* Makefile in Sources */,
 				33AED4E02A30050A006EC0B4 /* JsonVC.swift in Sources */,
 				2FC154322A36B84D00AC9346 /* Opener.swift in Sources */,

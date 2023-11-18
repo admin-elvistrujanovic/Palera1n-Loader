@@ -153,7 +153,7 @@ class ActionsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private func HideEnv(viewController: UIViewController) {
             if (!envInfo.isRootful) {
-                let strapValue = Check.installation()
+                let strapValue = Bootstrapper.installation()
                 switch strapValue {
                 case .rootless_installed:
                     #if !targetEnvironment(simulator)

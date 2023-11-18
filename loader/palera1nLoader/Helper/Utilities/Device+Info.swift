@@ -1,0 +1,79 @@
+//
+//  Device+Info.swift
+//  palera1nLoader
+//
+//  Created by samara on 11/17/23.
+//
+
+import Foundation
+import Extras
+
+public class VersionSeeker {
+    static func deviceBoot_Args() -> String {
+        var size: size_t = 0
+        sysctlbyname("kern.bootargs", nil, &size, nil, 0)
+        var machine = [CChar](repeating: 0, count: size)
+        sysctlbyname("kern.bootargs", &machine, &size, nil, 0)
+        let bootArgs = String(cString: machine)
+        return bootArgs
+    }
+    
+    static func kernelVersion() -> String {
+        var utsnameInfo = utsname()
+        uname(&utsnameInfo)
+
+        let releaseCopy = withUnsafeBytes(of: &utsnameInfo.release) { bytes in
+            Array(bytes)
+        }
+
+        let version = String(cString: releaseCopy)
+        return version
+    }
+    
+    // iPhone12,1 etc
+    static func deviceId() -> String? {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let modelCode = withUnsafePointer(to: &systemInfo.machine) {
+            $0.withMemoryRebound(to: CChar.self, capacity: 1) {
+                ptr in String.init(validatingUTF8: ptr)
+            }
+        }
+        if modelCode!.contains("arm64") || modelCode!.contains("x86_64") {
+            return "Simulated"
+        }
+        return modelCode
+    }
+    
+    // Gets the boot manifest hash for iOS 15+ only, this will only be useful for non-Rootful jailbreaks
+    static func bootmanifestHash() -> String? {
+        if #available(iOS 15.0, *) {
+            let registryEntry = IORegistryEntryFromPath(kIOMainPortDefault, "IODeviceTree:/chosen")
+
+            guard let bootManifestHashUnmanaged = IORegistryEntryCreateCFProperty(registryEntry, "boot-manifest-hash" as CFString, kCFAllocatorDefault, 0),
+                  let bootManifestHash = bootManifestHashUnmanaged.takeRetainedValue() as? Data else {
+                return nil
+            }
+
+            return bootManifestHash.map { String(format: "%02X", $0) }.joined()
+        } else {
+            return nil
+        }
+    }
+    // Get's iboot version, i.e iBoot-10151.60.55 or "PongoOS"
+    static func ibootVersion() -> String? {
+        if #available(iOS 15.0, *) {
+            let registryEntry = IORegistryEntryFromPath(kIOMainPortDefault, "IODeviceTree:/chosen")
+
+            guard let firmwareVersionUnmanaged = IORegistryEntryCreateCFProperty(registryEntry, "firmware-version" as CFString, kCFAllocatorDefault, 0),
+                  let firmwareVersionData = firmwareVersionUnmanaged.takeRetainedValue() as? Data,
+                  let firmwareVersionString = String(data: firmwareVersionData, encoding: .utf8) else {
+                return nil
+            }
+
+            return firmwareVersionString
+        }
+
+        return nil
+    }
+}

@@ -129,7 +129,7 @@ class DiagnosticsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.textLabel?.text = LocalizationManager.shared.local("INSTALL_FR")
             cell.detailTextLabel?.text = envInfo.hasForceReverted ? LocalizationManager.shared.local("TRUE") : LocalizationManager.shared.local("FALSE")
         case LocalizationManager.shared.local("STRAP_INFO"):
-            let strapValue = Check.installation()
+            let strapValue = Bootstrapper.installation()
             switch strapValue {
             case .rootful:
                 cell.detailTextLabel?.text = LocalizationManager.shared.local("FALSE")
@@ -141,6 +141,8 @@ class DiagnosticsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 cell.detailTextLabel?.text = LocalizationManager.shared.local("TRUE")
             case .rootful_installed:
                 cell.detailTextLabel?.text = LocalizationManager.shared.local("TRUE")
+            default:
+                cell.detailTextLabel?.text = LocalizationManager.shared.local("FALSE")
             }
             cell.textLabel?.text = LocalizationManager.shared.local("INSTALL_INFO")
         case LocalizationManager.shared.local("KINFO_FLAGS"):

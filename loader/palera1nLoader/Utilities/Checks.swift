@@ -9,54 +9,7 @@ import Foundation
 import UIKit
 import MachO
 
-struct environment {
-    var env_type: Int!
-    var jb_folder: String?
-}
-
-enum installStatus {
-    case simulated
-    case rootful
-    case rootful_installed
-    case rootless
-    case rootless_installed
-}
-
 class Check {
-    
-    static public func installation() -> installStatus {
-        #if targetEnvironment(simulator)
-        return .simulated
-        #else
-        if envInfo.isRootful {
-            if fm.fileExists(atPath: "/.procursus_strapped") {
-                return .rootful_installed
-            } else {
-                return .rootful
-            }
-        }
-        
-        let dir = "/private/preboot/\(envInfo.bmHash)"
-        var jbFolders = [String]()
-        
-        do {
-            let contents = try fm.contentsOfDirectory(atPath: dir)
-            jbFolders = contents.filter { $0.hasPrefix("jb-") }
-            let jbFolderExists = !jbFolders.isEmpty
-            let jbSymlinkPath = "/var/jb"
-            let jbSymlinkExists = fm.fileExists(atPath: jbSymlinkPath)
-            
-            if jbFolderExists && jbSymlinkExists {
-                return .rootless_installed
-            } else {
-                return .rootless
-            }
-        } catch {
-            log(type: .fatal, msg: "Failed to get contents of directory: \(error.localizedDescription)")
-            return .rootless
-        }
-        #endif
-    }
     
     @discardableResult
     static public func loaderDirectories() -> Bool {

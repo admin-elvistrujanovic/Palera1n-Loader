@@ -35,32 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = navController
             window?.makeKeyAndVisible()
         }
-
-        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
-            launchedShortcutItem = shortcutItem
-            switch shortcutItem.type {
-            case "qa_respring":
-                spawn(command: "/cores/binpack/bin/launchctl", args: ["kickstart", "-k", "system/com.apple.backboardd"])
-            case "qa_uicache":
-                spawn(command: "/cores/binpack/usr/bin/uicache", args: ["-a"])
-            default:
-                print("Unknown Option")
-            }
-            return false
-        }
     
         return true
     }
-    
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        switch shortcutItem.type {
-        case "qa_respring":
-            spawn(command: "/cores/binpack/bin/launchctl", args: ["kickstart", "-k", "system/com.apple.backboardd"])
-        case "qa_uicache":
-            spawn(command: "/cores/binpack/usr/bin/uicache", args: ["-a"])
-        default:
-            print("Unknown Option")
-        }
-    }
-    
 }
