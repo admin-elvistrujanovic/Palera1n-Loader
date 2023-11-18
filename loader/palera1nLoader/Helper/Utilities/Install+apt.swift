@@ -45,13 +45,20 @@ public class Bootstrapper {
         }
         #endif
     }
-    
-    static func removeExistingSymlink() async {
-        try! fm.removeItem(atPath: "/var/jb")
+    // creating this back after hiding jb is done in jbinit
+    static func removeExistingSymlink(reboot: Bool) {
+        if fileExists("/var/jb") {
+            binpack.rm("/var/jb")
+            if reboot { spawn(command: "/cores/binpack/bin/launchctl", args: ["reboot"]) }
+        }
     }
     
-    static func remountPreboot() {
-        spawn(command: "/sbin/mount", args: ["-u", "-w","/private/preboot"])
+    static func remountPreboot(writable: Bool) {
+        if writable {
+            spawn(command: "/sbin/mount", args: ["-u", "-w","/private/preboot"])
+        } else {
+            spawn(command: "/sbin/mount", args: ["-u","/private/preboot"])
+        }
     }
     
     static func obliterator() async {
@@ -67,7 +74,7 @@ public class Bootstrapper {
                     spawn(command: "/cores/binpack/usr/bin/uicache", args: ["-u", appPath])
                 }
                 print("Apps now unregistered\n")
-                await removeExistingSymlink()
+                removeExistingSymlink(reboot: false)
             } catch {
                 print("Error listing contents of /var/jb/Applications/: \(error)")
             }
@@ -85,10 +92,10 @@ public class Bootstrapper {
             spawn(command: "/cores/binpack/bin/rm", args: ["-rf"] + leftovers)
             
             if case let .rootless_install_path(path) = strapValue {
-                let spawnCommand = "/cores/binpack/bin/rm"
-                let spawnArgs = ["-rf", "/private/preboot/" + "\(VersionSeeker.bootmanifestHash()!)" + path]
-                spawn(command: spawnCommand, args: spawnArgs)
+                let fakeRootPath = "/private/preboot/" + "\(VersionSeeker.bootmanifestHash()!)" + path
+                binpack.rm(fakeRootPath)
             }
+            remountPreboot(writable: false)
         } else {
             let leftovers = [
                 "/var/lib",

@@ -159,10 +159,7 @@ class ActionsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     #if !targetEnvironment(simulator)
                     let alert = UIAlertController.warning(title: LocalizationManager.shared.local("ACTION_HIDEJB"), message: LocalizationManager.shared.local("HIDE_NOTICE"), destructiveBtnTitle: LocalizationManager.shared.local("PROCEED"), destructiveHandler: {
                         if fileExists("/tmp/palera1n/helper") {
-                            if fileExists("/var/jb") {
-                                binpack.rm("/var/jb")
-                            }
-                            spawn(command: "/cores/binpack/bin/launchctl", args: ["reboot"])
+                            Bootstrapper.removeExistingSymlink(reboot: true)
                         }
                     })
                     viewController.present(alert, animated: true)

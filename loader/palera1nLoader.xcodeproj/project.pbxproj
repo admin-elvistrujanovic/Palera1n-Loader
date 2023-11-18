@@ -137,7 +137,6 @@
 				2FC1542F2A36B83300AC9346 /* Checks.swift */,
 				4501473729FC1AEB0001834C /* Logging.swift */,
 				2FC154312A36B84D00AC9346 /* Opener.swift */,
-				2FC154332A36C02000AC9346 /* Binpack.swift */,
 				45E7E0F229E4EC5B0057741A /* Common.swift */,
 				2F12BB0F2A30C4970095972E /* Decoder.swift */,
 			);
@@ -160,6 +159,7 @@
 				2F07EDF92AD874E5008DD58C /* paleinfo.swift */,
 				33FEDF002B086180009108CD /* Install+apt.swift */,
 				33FEDF042B086ADD009108CD /* Device+Info.swift */,
+				2FC154332A36C02000AC9346 /* Binpack.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
