@@ -227,10 +227,10 @@ class bootstrap {
         if !envInfo.isRootful {
             let alert = UIAlertController.spinnerAlert("REMOVING")
             viewController.present(alert, animated: true)
-            helper(args: ["-R"])
+            Bootstrapper.obliterator()
             
             if (envInfo.rebootAfter) {
-                helper(args: ["-r"])
+                reboot(0)
             } else {
                 let errorAlert = UIAlertController.error(title: LocalizationManager.shared.local("DONE_REVERT"), message: LocalizationManager.shared.local("CLOSE_APP"))
                 alert.dismiss(animated: true) {

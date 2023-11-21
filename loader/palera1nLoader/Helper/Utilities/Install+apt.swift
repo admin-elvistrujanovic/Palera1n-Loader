@@ -34,8 +34,6 @@ public class Bootstrapper {
             
             if jbFolderExists && jbSymlinkExists {
                 return .rootless_installed
-            } else if jbFolderExists {
-                return .rootless_install_path(path: jbSymlinkPath)
             } else {
                 return .rootless
             }
@@ -44,6 +42,20 @@ public class Bootstrapper {
             return .rootless
         }
         #endif
+    }
+    
+    static func locateExistingFakeRoot() -> String? {
+        guard let bootManifestHash = VersionSeeker.bootmanifestHash() else {
+            return nil
+        }
+        let ppURL = URL(fileURLWithPath: "/private/preboot/" + bootManifestHash)
+        guard let candidateURLs = try? FileManager.default.contentsOfDirectory(at: ppURL , includingPropertiesForKeys: nil, options: []) else { return nil }
+        for candidateURL in candidateURLs {
+            if candidateURL.lastPathComponent.hasPrefix("jb-") {
+                return candidateURL.path
+            }
+        }
+        return nil
     }
     // creating this back after hiding jb is done in jbinit
     static func removeExistingSymlink(reboot: Bool) {
@@ -61,8 +73,7 @@ public class Bootstrapper {
         }
     }
     
-    static func obliterator() async {
-        let strapValue = Bootstrapper.installation()
+    static func obliterator() {
         let rootlessAppDir = "/var/jb/Applications/"
         
         if !envInfo.isRootful {
@@ -90,18 +101,13 @@ public class Bootstrapper {
                 "/var/mobile/Application Support/xyz.willy.Zebra" ]
             
             spawn(command: "/cores/binpack/bin/rm", args: ["-rf"] + leftovers)
-            
-            if case let .rootless_install_path(path) = strapValue {
-                let fakeRootPath = "/private/preboot/" + "\(VersionSeeker.bootmanifestHash()!)" + path
-                binpack.rm(fakeRootPath)
+            let fakeRootPath = locateExistingFakeRoot()
+            if fakeRootPath != nil {
+                do {
+                    binpack.rm(fakeRootPath!)
+                }
             }
             remountPreboot(writable: false)
-        } else {
-            let leftovers = [
-                "/var/lib",
-                "/var/mobile/Application Support/xyz.willy.Zebra",
-                "/var/cache"]
-            spawn(command: "/cores/binpack/bin/rm", args: ["-rf"] + leftovers)
         }
         
         spawn(command: "/cores/binpack/usr/bin/uicache", args: ["-a"])
@@ -117,7 +123,7 @@ public class Bootstrapper {
             return letters[letters.index(letters.startIndex, offsetBy: randomIndex)]
         }
         let randomString = String(randomCharacters)
-        return "/private/preboot/\(VersionSeeker.bootmanifestHash()!)/jb-\(randomString)"
+        return "jb-\(randomString)"
     }
 }
 
@@ -127,6 +133,5 @@ enum installStatus {
     case rootful_installed
     case rootless
     case rootless_installed
-    case rootless_install_path(path: String)
 }
 
