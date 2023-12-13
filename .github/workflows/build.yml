@@ -21,13 +21,7 @@ jobs:
         run: IOS=1 FINAL=1 make
 
       - name: Upload artifact
-        uses: wangyucode/sftp-upload-action@v1.4.8
+       - uses: actions/upload-artifact@v3
         with:
-          host: ${{ secrets.STATIC_FTP_HOST }}
-          port: ${{ secrets.STATIC_FTP_PORT }}
-          username: static
-          password: ${{ secrets.STATIC_FTP_PASS }}
-          forceUpload: true
-          dryRun: false
-          localDir: 'packages/'
-          remoteDir: '/artifacts/loader/universal_lite'
+        name: loader
+        path: */**/[abc]rtifac?/*
