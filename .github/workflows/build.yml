@@ -3,14 +3,14 @@ name: Run Makefile
 on:
 
   workflow_dispatch:
-    
+
 jobs:
   build:
     runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
+
       - name: Install dependencies (packages)
         run: |
           curl -LO https://github.com/ProcursusTeam/ldid/releases/download/v2.1.5-procursus7/ldid_macosx_x86_64
@@ -19,9 +19,14 @@ jobs:
 
       - name: Compile
         run: IOS=1 FINAL=1 make
-        
-      - name: Upload APK
+
+      - name: Find DMG and IPA files
+        run: |
+          find . -type f -name "*.dmg" -o -name "*.ipa" -exec echo {} + > artifact_paths.txt
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: loader
-          path: *
+          name: artifacts
+          paths: |
+            $(cat artifact_paths.txt)
