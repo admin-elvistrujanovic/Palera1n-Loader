@@ -22,11 +22,11 @@ jobs:
 
       - name: Find DMG and IPA files
         run: |
-          find . -type f -name "*.dmg" -o -name "*.ipa" -exec echo {} + > artifact_paths.txt
+          find . -type f -name "*.dmg" -o -name "*.ipa" > artifacts.txt
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: artifacts
-          paths: |
-            $(cat artifact_paths.txt)
+          path: artifacts.txt
+          retention-days: 7 # optional, specify retention days
