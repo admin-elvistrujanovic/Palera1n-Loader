@@ -20,3 +20,8 @@ jobs:
       - name: Compile
         run: IOS=1 FINAL=1 make
         
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: loader
+          path: *
